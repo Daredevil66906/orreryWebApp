@@ -36,14 +36,14 @@
                 console.log('Data loaded:', data);
                 
                 for (let planet in data[0]) {
-                    const geometry = new THREE.SphereGeometry(0.05, 32, 32); // Adjust size for visibility
+                    const geometry = new THREE.SphereGeometry(0.05, 32, 32); 
                     const material = new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff });
                     const planetMesh = new THREE.Mesh(geometry, material);
                     scene.add(planetMesh);
 
                     
-                    planetMesh.position.x = data[0][planet][0]; // x
-                    planetMesh.position.y = data[0][planet][1]; // y
+                    planetMesh.position.x = data[0][planet][0]; 
+                    planetMesh.position.y = data[0][planet][1];
                     planetMesh.position.z = 0; 
                     console.log(`${planet} position:`, planetMesh.position);
                 }
