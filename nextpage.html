@@ -11,7 +11,7 @@
 </head>
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"></script> <!-- Updated source -->
+    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"></script> 
     <script>
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -19,14 +19,12 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
-        // Add lighting to the scene
         const ambientLight = new THREE.AmbientLight(0xffffff, 1);
         scene.add(ambientLight);
         const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
         directionalLight.position.set(0, 0, 5);
         scene.add(directionalLight);
 
-        // Load the positions from JSON
         fetch('solar_system_positions.json')
             .then(response => {
                 if (!response.ok) {
@@ -36,17 +34,17 @@
             })
             .then(data => {
                 console.log('Data loaded:', data);
-                // Create 3D objects for the planets
+                
                 for (let planet in data[0]) {
                     const geometry = new THREE.SphereGeometry(0.05, 32, 32); // Adjust size for visibility
                     const material = new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff });
                     const planetMesh = new THREE.Mesh(geometry, material);
                     scene.add(planetMesh);
 
-                    // Set initial position
+                    
                     planetMesh.position.x = data[0][planet][0]; // x
                     planetMesh.position.y = data[0][planet][1]; // y
-                    planetMesh.position.z = 0; // Set z position
+                    planetMesh.position.z = 0; 
                     console.log(`${planet} position:`, planetMesh.position);
                 }
             })
@@ -54,14 +52,14 @@
                 console.error('Error fetching JSON data:', error);
             });
 
-        camera.position.z = 3; // Adjust camera position
+        camera.position.z = 3; 
 
-        // Add orbit controls
+        
         const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
         const animate = function () {
             requestAnimationFrame(animate);
-            controls.update(); // Update controls
+            controls.update(); 
             renderer.render(scene, camera);
         };
 
